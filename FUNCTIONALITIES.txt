@@ -1,0 +1,8 @@
+1. Return an entire list of data for a specific stock
+2. Return the highest value all time
+3. Return the lowest value all time
+4. Return data from stock on a specific date
+5. Return data from stock on a specific time frame
+6. Return average stock price from a specific timeframe
+7. Return average stock price from a specific date
+8. Create a history file containing all the info fetched in a session
