@@ -6,6 +6,8 @@ from datetime import datetime
 # appl = stockClass("/fileForApple")
 # amzn = stockClass()
 # goog = stockClass()
+# optional = stockClass("")
+
 
 # data_source = "./stock-data/AAPL_DATA.json"
 # with open(data_source, "r") as file:
@@ -33,7 +35,7 @@ def specific_date_data():
 question_Prompt = '''
 =========================================================
 Enter a number to select one of the following
-    [1] - View LATEST stock data
+    [1] - View LATEST stock data 
     [2] - View LOWEST trading price
     [3] - View HIGHEST trading price
     [4] - View all stock data on a SPECIFIC date 
@@ -46,7 +48,8 @@ print('''Welcome! Enter a number to access data on a specific stock!
         [2] - AAPL (Apple)
         [3] - AMZN (Amazon)
         [4] - NTFX (Netflix)
-        [5] - GOOG (Google)''')
+        [5] - GOOG (Google)
+        [6] - Input your own JSON stock data filepath''')
 
 user_input = int(input())
 
@@ -54,6 +57,7 @@ if user_input == 1:
     print("")
     print("Accessing Microsoft...")
     print(question_Prompt)
+
 elif user_input == 2:
     print("")
     print("Accessing Apple...")
