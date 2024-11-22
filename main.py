@@ -1,14 +1,14 @@
 # import stockClass
 import json
 
-appl = stockClass("/fileForApple")
-amzn = stockClass()
-goog = stockClass()
+# appl = stockClass("/fileForApple")
+# amzn = stockClass()
+# goog = stockClass()
 
-data_source = "./stock-data/AAPL_DATA.json"
-with open(data_source, "r") as file:
-    for dict in json.load(file):
-        appl.addData()
+# data_source = "./stock-data/AAPL_DATA.json"
+# with open(data_source, "r") as file:
+#     for dict in json.load(file):
+#         appl.addData()
 
 '''
 WHOLE GAME
