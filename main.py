@@ -6,63 +6,9 @@ from datetime import datetime
 '''
 WHOLE GAME
 '''
-
-# user_input = int(input()) - 1
-# listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
-# # example: amzn = Stock(stockName)
-# globals()[listOfStocks[user_input].lower()] = Stock(listOfStocks[user_input])
-# stockName = globals()[listOfStocks[user_input].lower()]
-
-# data_source = f"./stock-data/{listOfStocks[user_input]}.json"
-# with open(data_source, "r") as file:
-#     for dict in json.load(file):
-#         print(dict)
-#         stockName.addData(StockEntry(dict["date"], dict["open"], dict["high"], dict["low"], dict["close"], dict["volume"]))
-
-# for x in stockName.data:
-#     print(x)
-
-# print(f"stockName: {listOfStocks[user_input]}")
-
-# print(globals()[listOfStocks[user_input].lower()].data[0])
+# def select_option(number):
 
 
-
-def select_option(number):
-    default_Response = True
-
-    while default_Response:
-        if number == 1:
-            print("You want to view the LATEST data")
-        elif number == 2:
-            print("You want to View LOWEST trading price")
-        elif number == 3:
-            print("You want to View HIGHEST trading price")
-        elif number == 4:
-            print("You want to View all stock data on a SPECIFIC date")
-        elif number == 5:
-            print("View stock price change percentage from __ to __ (ANNUALLY, QUARTERLY)")
-        elif number == 6:
-            print("You want to Return stock price change percentage (ALL TIME)")
-        else:
-            print("Invalid Option: Try Again")
-            return True  # Return to previous menu
-
-        # Ask if the user wants to continue
-        user_Response = input("Would you like to view another statistic? (y/n): ").strip().lower()
-
-        if user_Response == 'n':
-            print("Returning to the main menu...")
-            return False  # Exit and return to main menu
-        elif user_Response == 'y':
-            print("Returning to the selection menu...")
-            return True  # Signal to restart menu selection
-        else:
-            print("Invalid Input. Returning to the main menu...")
-            return False
-
-    
-question_Prompt_2 = "Would you like to view another statistic? (y/n)"
 
 
 question_Prompt = '''
