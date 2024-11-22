@@ -1,6 +1,8 @@
 # import stockClass
 import json
 
+from datetime import datetime
+
 # appl = stockClass("/fileForApple")
 # amzn = stockClass()
 # goog = stockClass()
@@ -15,6 +17,11 @@ import json
 '''
 WHOLE GAME
 '''
+# def select_option(number):
+
+
+
+
 question_Prompt = '''
 =========================================================
 Enter a number to select one of the following
