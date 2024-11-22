@@ -15,11 +15,6 @@ import json
 '''
 WHOLE GAME
 '''
-# def select_option(number):
-
-
-
-
 question_Prompt = '''
 =========================================================
 Enter a number to select one of the following
@@ -30,6 +25,11 @@ Enter a number to select one of the following
     [5] - View stock price change percentage from __ to __ (ANNUALLY, QUARTERLY)
     [6] - Return stock price change percentage (ALL TIME)
 ========================================================='''
+
+
+
+
+
 
 print('''Welcome! Enter a number to access data on a specific stock!
         [1] - MSFT (Microsoft)
