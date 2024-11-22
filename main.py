@@ -8,15 +8,6 @@ WHOLE GAME
 '''
 # def select_option(number):
 
-# Function for retreiving stock data for a specific date
-def specific_date_data():
-    date_string = input("Enter a date (YYYY-MM-DD): ")
-    date_object = datetime.strptime(date_string, "%Y-%m-%d")
-    if (date_object.weekday() >= 5):
-        print("Please enter a valid weekday! Stock markets close on weekends.")
-        specific_date_data()
-    else:
-        print("ok")
 
 question_Prompt = '''
 =========================================================
@@ -60,4 +51,17 @@ print(globals()[listOfStocks[user_input].lower()].data[0])
 store something in txt file?
 '''
 
+# Function for retreiving stock data for a specific date
+def specific_date_data():
+    date_string = input("Enter a date (YYYY-MM-DD): ")
+    date_object = datetime.strptime(date_string, "%Y-%m-%d")
+    if (date_object.weekday() >= 5):
+        print("Please enter a valid weekday! Stock markets close on weekends.")
+        specific_date_data()
+    else:
+        for i in stockName.data:
+            if (i.date == date_string):
+                print(i)
 
+# If user selects option 4 to view data on a specific date:
+specific_date_data()
