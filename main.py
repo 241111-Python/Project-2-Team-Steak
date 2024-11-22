@@ -1,6 +1,8 @@
 # import stockClass
 import json
 
+from datetime import datetime
+
 # appl = stockClass("/fileForApple")
 # amzn = stockClass()
 # goog = stockClass()
@@ -14,6 +16,18 @@ import json
 WHOLE GAME
 '''
 # def select_option(number):
+
+
+# Accessing data on a specific date
+def specific_date_data():
+    date_string = input("Enter a date (YYYY-MM-DD): ")
+    date_object = datetime.strptime(date_string, "%Y-%m-%d").date()
+
+    if (date_object.weekday() >= 5):
+        print("Please enter a valid weekday! Stock markets aren't open during the weekends.")
+        specific_date_data()
+    else:
+        print("ok")
 
 
 question_Prompt = '''
