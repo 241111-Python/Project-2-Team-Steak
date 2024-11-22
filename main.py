@@ -1,6 +1,8 @@
 # import stockClass
 import json
 
+from datetime import datetime
+
 # appl = stockClass("/fileForApple")
 # amzn = stockClass()
 # goog = stockClass()
@@ -30,6 +32,11 @@ Enter a number to select one of the following
     [5] - View stock price change percentage from __ to __ (ANNUALLY, QUARTERLY)
     [6] - Return stock price change percentage (ALL TIME)
 ========================================================='''
+
+
+
+
+
 
 print('''Welcome! Enter a number to access data on a specific stock!
         [1] - MSFT (Microsoft)
