@@ -3,23 +3,66 @@ import json
 
 from datetime import datetime
 
-# appl = stockClass("/fileForApple")
-# amzn = stockClass()
-# goog = stockClass()
-# optional = stockClass("")
-
-
-# data_source = "./stock-data/AAPL_DATA.json"
-# with open(data_source, "r") as file:
-#     for dict in json.load(file):
-#         appl.addData()
-
 '''
 WHOLE GAME
 '''
-# def select_option(number):
+
+# user_input = int(input()) - 1
+# listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
+# # example: amzn = Stock(stockName)
+# globals()[listOfStocks[user_input].lower()] = Stock(listOfStocks[user_input])
+# stockName = globals()[listOfStocks[user_input].lower()]
+
+# data_source = f"./stock-data/{listOfStocks[user_input]}.json"
+# with open(data_source, "r") as file:
+#     for dict in json.load(file):
+#         print(dict)
+#         stockName.addData(StockEntry(dict["date"], dict["open"], dict["high"], dict["low"], dict["close"], dict["volume"]))
+
+# for x in stockName.data:
+#     print(x)
+
+# print(f"stockName: {listOfStocks[user_input]}")
+
+# print(globals()[listOfStocks[user_input].lower()].data[0])
 
 
+
+def select_option(number):
+    default_Response = True
+
+    while default_Response:
+        if number == 1:
+            print("You want to view the LATEST data")
+        elif number == 2:
+            print("You want to View LOWEST trading price")
+        elif number == 3:
+            print("You want to View HIGHEST trading price")
+        elif number == 4:
+            print("You want to View all stock data on a SPECIFIC date")
+        elif number == 5:
+            print("View stock price change percentage from __ to __ (ANNUALLY, QUARTERLY)")
+        elif number == 6:
+            print("You want to Return stock price change percentage (ALL TIME)")
+        else:
+            print("Invalid Option: Try Again")
+            return True  # Return to previous menu
+
+        # Ask if the user wants to continue
+        user_Response = input("Would you like to view another statistic? (y/n): ").strip().lower()
+
+        if user_Response == 'n':
+            print("Returning to the main menu...")
+            return False  # Exit and return to main menu
+        elif user_Response == 'y':
+            print("Returning to the selection menu...")
+            return True  # Signal to restart menu selection
+        else:
+            print("Invalid Input. Returning to the main menu...")
+            return False
+
+    
+question_Prompt_2 = "Would you like to view another statistic? (y/n)"
 
 
 question_Prompt = '''
@@ -34,43 +77,56 @@ Enter a number to select one of the following
 ========================================================='''
 
 
-
-
-
-
-print('''Welcome! Enter a number to access data on a specific stock!
+while True:  # Main menu loop
+        print('''Welcome! Enter a number to access data on a specific stock!
         [1] - MSFT (Microsoft)
         [2] - AAPL (Apple)
         [3] - AMZN (Amazon)
         [4] - NTFX (Netflix)
         [5] - GOOG (Google)
-        [6] - Input your own JSON stock data filepath''')
+        [6] - Input your own JSON stock data filepath
+        [0] - Exit Program
+        ''')
 
-user_input = int(input())
+        try:
+            user_input = int(input("Enter your choice: "))
+            if user_input == 0:
+                print("Exiting the program. Goodbye!")
+                break  # Exit the main menu
+            elif 1 <= user_input <= 5:
+                stock_names = ["Microsoft", "Apple", "Amazon", "Netflix", "Google"]
+                print(f"\nAccessing {stock_names[user_input - 1]}...")
 
-if user_input == 1:
-    print("")
-    print("Accessing Microsoft...")
-    print(question_Prompt)
+                while True:  # Submenu loop for statistics
+                    print('''
+=========================================================
+Enter a number to select one of the following:
+    [1] - View LATEST stock data 
+    [2] - View LOWEST trading price
+    [3] - View HIGHEST trading price
+    [4] - View all stock data on a SPECIFIC date 
+    [5] - View stock price change percentage from __ to __ (ANNUALLY, QUARTERLY)
+    [6] - Return stock price change percentage (ALL TIME)
+    [0] - Go Back to the Stock Selection Menu
+=========================================================
+                    ''')
+                    try:
+                        option = int(input("Enter your choice: "))
+                        if option == 0:
+                            print("Returning to Stock Selection Menu...")
+                            break  # Exit submenu to return to stock selection menu
+                        if not select_option(option):
+                            break  # Exit submenu to main menu
+                    except ValueError:
+                        print("Invalid input. Please enter a valid number.")
 
-elif user_input == 2:
-    print("")
-    print("Accessing Apple...")
-    print(question_Prompt)
-elif user_input == 3:
-    print("")
-    print("Accessing Amazon...")
-    print(question_Prompt)
-elif user_input == 4:
-    print("")
-    print("Accessing Netflix...")
-    print(question_Prompt)
-elif user_input == 5:
-    print("")
-    print("Accessing Google...")
-    print(question_Prompt)
-else:
-    print("Incorrect Input!...")    
+            elif user_input == 6:
+                print("\nYou chose to input your own JSON stock data filepath.")
+                # Add your custom JSON handling here
+            else:
+                print("Incorrect Input! Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
 
 '''
