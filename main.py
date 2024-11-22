@@ -1,18 +1,7 @@
-# import stockClass
-import json
-
+from Stock import Stock
+from StockEntry import StockEntry
 from datetime import datetime
-
-# appl = stockClass("/fileForApple")
-# amzn = stockClass()
-# goog = stockClass()
-# optional = stockClass("")
-
-
-# data_source = "./stock-data/AAPL_DATA.json"
-# with open(data_source, "r") as file:
-#     for dict in json.load(file):
-#         appl.addData()
+import json
 
 '''
 WHOLE GAME
@@ -40,46 +29,35 @@ Enter a number to select one of the following
     [6] - Return stock price change percentage (ALL TIME)
 ========================================================='''
 
-
-
-
-
-
 print('''Welcome! Enter a number to access data on a specific stock!
         [1] - MSFT (Microsoft)
         [2] - AAPL (Apple)
         [3] - AMZN (Amazon)
-        [4] - NTFX (Netflix)
+        [4] - NFLX (Netflix)
         [5] - GOOG (Google)
         [6] - Input your own JSON stock data filepath''')
 
-user_input = int(input())
+user_input = int(input()) - 1
+listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
+# example: amzn = Stock(stockName)
+globals()[listOfStocks[user_input].lower()] = Stock(listOfStocks[user_input])
+stockName = globals()[listOfStocks[user_input].lower()]
 
-if user_input == 1:
-    print("")
-    print("Accessing Microsoft...")
-    print(question_Prompt)
+data_source = f"./stock-data/{listOfStocks[user_input]}.json"
+with open(data_source, "r") as file:
+    for dict in json.load(file):
+        print(dict)
+        stockName.addData(StockEntry(dict["date"], dict["open"], dict["high"], dict["low"], dict["close"], dict["volume"]))
 
-elif user_input == 2:
-    print("")
-    print("Accessing Apple...")
-    print(question_Prompt)
-elif user_input == 3:
-    print("")
-    print("Accessing Amazon...")
-    print(question_Prompt)
-elif user_input == 4:
-    print("")
-    print("Accessing Netflix...")
-    print(question_Prompt)
-elif user_input == 5:
-    print("")
-    print("Accessing Google...")
-    print(question_Prompt)
-else:
-    print("Incorrect Input!...")    
+for x in stockName.data:
+    print(x)
 
+print(f"stockName: {listOfStocks[user_input]}")
+
+print(globals()[listOfStocks[user_input].lower()].data[0])
 
 '''
 store something in txt file?
 '''
+
+
