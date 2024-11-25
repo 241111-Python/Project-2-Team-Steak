@@ -122,17 +122,17 @@ while True:  # Main menu loop
 """
 store something in txt file?
 """
-test = Stock("GOOG")
-with open("./stock-data/GOOG.json", "r") as file:
-    for dict in json.load(file):
-        test.addData(
-            StockEntry(
-                dict["date"],
-                dict["open"],
-                dict["high"],
-                dict["low"],
-                dict["close"],
-                dict["volume"],
-            )
-        )
-test.yearly_data("2015")
+# test = Stock("GOOG")
+# with open("./stock-data/GOOG.json", "r") as file:
+#     for dict in json.load(file):
+#         test.addData(
+#             StockEntry(
+#                 dict["date"],
+#                 dict["open"],
+#                 dict["high"],
+#                 dict["low"],
+#                 dict["close"],
+#                 dict["volume"],
+#             )
+#         )
+# test.yearly_data("2015")
