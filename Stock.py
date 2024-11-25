@@ -37,17 +37,21 @@ class Stock:
             for i in self.data:
                 if (i.date == date_string):
                     exists = True
-                    # print(i)
+                    print(i)
                     break
             if (exists == False):
                 print("The data is not currently available for this date!\n")
 
-    def range_date_data(self, date_start_string, date_end_string):
+    def range_date_data(self, date_start_string, date_end_string, is_yearly = False):
         #date_start_string = input("Enter a start date (YYYY-MM-DD): ")
         #date_end_string = input("Enter an end date (YYYY-MM-DD): ")
 
         date_start_object = datetime.strptime(date_start_string, "%Y-%m-%d")
         date_end_object = datetime.strptime(date_end_string, "%Y-%m-%d")
+
+        if (date_end_object < date_start_object):
+            print("Please make sure your end date comes AFTER your start date!")
+            return
 
         start_exists = False
         end_exists = False
@@ -67,6 +71,7 @@ class Stock:
 
         dates = []
         closing_prices = []
+        opening_prices = []
 
         data_string = ""
         for i in self.data:
@@ -86,12 +91,16 @@ class Stock:
                 close_open_diff += (i.close - i.open)
                 dates.append(i.date)
                 closing_prices.append(i.close)
+                opening_prices.append(i.open)
                 data_string = data_string + str(i)
             if ((i.date == date_end_string) or (date_object > date_end_object)):
                 end_price = i.close
                 in_range = False
                 end_exists = True
                 break
+        if ((start_exists == False) or (end_exists == False)):
+            print("Please enter valid start and end dates!")
+            return
 
         print("Retrieving data from " + date_start_string + " to " + date_end_string)
         percentage_change = ((end_price - start_price)/start_price)*100
@@ -99,21 +108,49 @@ class Stock:
         avg_volume = total_volume/days
         # print(data_string)
 
-        print("Lowest price is: " + str(lowest_price))
-        print("Highest price is: " + str(highest_price))
-        print("Average closing price is: " + str(avg_closing))
-        print("Change in price is: " + str(percentage_change) + "%")
-        print("Closing vs opening price is: " + str(close_open_diff))
-        print("Average volume over this time period is: " + str(avg_volume))
+        if (is_yearly == False):
 
-        plt.figure(figsize=(10,5))
-        plt.plot(dates, closing_prices, color='b', label='Closing Price')
-        plt.title('Stock Closing Prices')
-        plt.xlabel('Date')
-        plt.ylabel('Closing Price')
-        plt.xticks([dates[0], dates[-1]])
-        plt.tight_layout()
-        plt.show()
+            print("Lowest price is: " + str(lowest_price))
+            print("Highest price is: " + str(highest_price))
+            print("Average closing price is: " + str(avg_closing))
+            print("Change in price is: " + str(percentage_change) + "%")
+            print("Closing vs opening price is: " + str(close_open_diff))
+            print("Average volume over this time period is: " + str(avg_volume))
+
+            fig, ax1 = plt.subplots()
+
+            ax1.plot(dates, closing_prices, color='b', label='Closing Price')
+            ax1.set_xlabel('Date')
+            ax1.set_ylabel('Closing Price', color='b')
+            ax1.tick_params(axis='y', labelcolor='b')
+
+            ax2 = ax1.twinx()
+            ax2.plot(dates, opening_prices, color='r', label='Volume')
+            ax2.set_ylabel('Opening Price', color='r')
+            ax2.tick_params(axis='y', labelcolor='r')
+
+            plt.xticks([dates[0], dates[-1]])
+            if (percentage_change > 0):
+                plt.title("Daily Stock Opening and Closing Prices( ↑" + str(round(percentage_change,2)) + "%)")
+            else:
+                plt.title("Daily Stock Opening and Closing Prices( ↓" + str(round(percentage_change,2)) + "%)")
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+
+            plt.show()
+
+        else:
+            plt.figure(figsize=(10,5))
+            plt.plot(dates, closing_prices, color='b', label='Closing Price')
+            if (percentage_change > 0):
+                plt.title("Daily Stock Opening and Closing Prices( ↑" + str(round(percentage_change,2)) + "%)")
+            else:
+                plt.title("Daily Stock Opening and Closing Prices( ↓" + str(round(percentage_change,2)) + "%)")
+            plt.xlabel('Date')
+            plt.ylabel('Closing Price')
+            plt.xticks([dates[0], dates[-1]])
+            plt.tight_layout()
+            plt.show()
 
     def quarterly_data(self, year_string, quarter):
         if (quarter == 1):
@@ -142,9 +179,9 @@ class Stock:
     def yearly_data(self, year_string):
         date_start_string = year_string + "-01-01"
         date_end_string = year_string + "-12-31"
-        self.range_date_data(date_start_string, date_end_string)
+        self.range_date_data(date_start_string, date_end_string, True)
 
     def all_time_data(self):
         date_start_string = self.data[0].date
         date_end_string = self.data[-1].date
-        self.range_date_data(date_start_string, date_end_string)
+        self.range_date_data(date_start_string, date_end_string, True)
