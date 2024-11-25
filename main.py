@@ -144,8 +144,6 @@ def access_secondary_menu(stock):
             print("Invalid input. Please enter a valid number.")
 
 
-
-
 # Main execution logic
 if args.filePath:
     print(f"Loading custom JSON stock data from: {args.filePath}")
