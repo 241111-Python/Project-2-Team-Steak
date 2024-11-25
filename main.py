@@ -1,6 +1,6 @@
 from Stock import Stock
 from StockEntry import StockEntry
-from datetime import datetime, timedelta
+from datetime import datetime
 import matplotlib.pyplot as plt
 import json
 
@@ -76,27 +76,7 @@ def specific_date_data():
 def range_date_data(date_start_string, date_end_string):
     #date_start_string = input("Enter a start date (YYYY-MM-DD): ")
     #date_end_string = input("Enter an end date (YYYY-MM-DD): ")
-    '''
-    if  date_start_object.weekday() == 5:
-        nearest_weekday_start = date_start_object - timedelta(days=1)
-    elif date_start_object.weekday() == 6:
-        nearest_weekday_start = date_start_object + timedelta(days=1)
-    else:
-        nearest_weekday_start = date_start_object
-    date_start = nearest_weekday_start.strftime("%Y-%m-%d")
 
-    print("adjusted start date: " + date_start)
-
-    if  date_end_object.weekday() == 5:
-        nearest_weekday_end = date_end_object - timedelta(days=1)
-    elif date_end_object.weekday() == 6:
-        nearest_weekday_end = date_end_object + timedelta(days=1)
-    else:
-        nearest_weekday_end = date_end_object
-    date_end = nearest_weekday_end.strftime("%Y-%m-%d")
-
-    print("adjusted end date: " + date_end)
-    '''
     date_start_object = datetime.strptime(date_start_string, "%Y-%m-%d")
     date_end_object = datetime.strptime(date_end_string, "%Y-%m-%d")
 
@@ -150,6 +130,13 @@ def range_date_data(date_start_string, date_end_string):
     avg_volume = total_volume/days
     print(data_string)
 
+    print("Lowest price is: " + str(lowest_price))
+    print("Highest price is: " + str(highest_price))
+    print("Average closing price is: " + str(avg_closing))
+    print("Change in price is: " + str(percentage_change) + "%")
+    print("Closing vs opening price is: " + str(close_open_diff))
+    print("Average volume over this time period is: " + str(avg_volume))
+
     plt.figure(figsize=(10,5))
     plt.plot(dates, closing_prices, color='b', label='Closing Price')
     plt.title('Stock Closing Prices')
@@ -158,13 +145,6 @@ def range_date_data(date_start_string, date_end_string):
     plt.xticks([dates[0], dates[-1]])
     plt.tight_layout()
     plt.show()
-
-    print("Lowest price is: " + str(lowest_price))
-    print("Highest price is: " + str(highest_price))
-    print("Average closing price is: " + str(avg_closing))
-    print("Change in price is: " + str(percentage_change) + "%")
-    print("Closing vs opening price is: " + str(close_open_diff))
-    print("Average volume over this time period is: " + str(avg_volume))
 
 def quarterly_data(year_string, quarter):
     if (quarter == 1):
@@ -204,6 +184,6 @@ def yearly_data(year_string):
 # Data over a range of dates
 # range_date_data("2014-12-12", "2015-12-12")
 
-quarterly_data("2014", 3)
+# quarterly_data("2014", 3)
 
 # yearly_data("2014")
