@@ -1,4 +1,6 @@
 from datetime import datetime
+from docx import Document
+from docx.shared import Inches
 import matplotlib.pyplot as plt
 
 class Stock:
@@ -113,6 +115,23 @@ class Stock:
         plt.ylabel('Closing Price')
         plt.xticks([dates[0], dates[-1]])
         plt.tight_layout()
+        plt.savefig("graph.png")
+        doc = Document()
+        doc.add_paragraph("Lowest price is: " + str(lowest_price) + 
+                          "\nHighest price is: " + str(highest_price) + 
+                          "\nAverage closing price is: " + str(avg_closing) + 
+                          "\nChange in price is: " + str(percentage_change) + 
+                          "%\nClosing vs opening price is: " + str(close_open_diff) + 
+                          "\nAverage volume over this time period is: " + str(avg_volume) + "\n")
+        doc.add_picture('graph.png', width=Inches(6))
+        doc.save('statistics.docx')
+        # with open('statistics.docx', 'w') as file:
+        #     file.write("Lowest price is: " + str(lowest_price) + "\n")
+        #     file.write("Highest price is: " + str(highest_price) + "\n")
+        #     file.write("Average closing price is: " + str(avg_closing) + "\n")
+        #     file.write("Change in price is: " + str(percentage_change) + "%\n")
+        #     file.write("Closing vs opening price is: " + str(close_open_diff) + "\n")
+        #     file.write("Average volume over this time period is: " + str(avg_volume) + "\n")
         plt.show()
 
     def quarterly_data(self, year_string, quarter):
