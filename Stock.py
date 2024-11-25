@@ -143,3 +143,8 @@ class Stock:
         date_start_string = year_string + "-01-01"
         date_end_string = year_string + "-12-31"
         self.range_date_data(date_start_string, date_end_string)
+
+    def all_time_data(self):
+        date_start_string = self.data[0].date
+        date_end_string = self.data[-1].date
+        self.range_date_data(date_start_string, date_end_string)
