@@ -1,6 +1,7 @@
 from Stock import Stock
 from StockEntry import StockEntry
 from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
 import json
 
 '''
@@ -112,8 +113,11 @@ def range_date_data(date_start_string, date_end_string):
 
     close_open_diff = 0
 
-    lowest_price = stockName.data[0].low
-    highest_price = stockName.data[0].high
+    lowest_price = 9999999
+    highest_price = 0
+
+    dates = []
+    closing_prices = []
 
     data_string = ""
     for i in stockName.data:
@@ -131,6 +135,8 @@ def range_date_data(date_start_string, date_end_string):
             total_volume += i.volume
             days += 1
             close_open_diff += (i.close - i.open)
+            dates.append(i.date)
+            closing_prices.append(i.close)
             data_string = data_string + str(i)
         if ((i.date == date_end_string) or (date_object > date_end_object)):
             end_price = i.close
@@ -143,6 +149,16 @@ def range_date_data(date_start_string, date_end_string):
     avg_closing = total_closing/days
     avg_volume = total_volume/days
     print(data_string)
+
+    plt.figure(figsize=(10,5))
+    plt.plot(dates, closing_prices, color='b', label='Closing Price')
+    plt.title('Stock Closing Prices')
+    plt.xlabel('Date')
+    plt.ylabel('Closing Price')
+    plt.xticks([dates[0], dates[-1]])
+    plt.tight_layout()
+    plt.show()
+
     print("Lowest price is: " + str(lowest_price))
     print("Highest price is: " + str(highest_price))
     print("Average closing price is: " + str(avg_closing))
@@ -188,6 +204,6 @@ def yearly_data(year_string):
 # Data over a range of dates
 # range_date_data("2014-12-12", "2015-12-12")
 
-# quarterly_data("2014", 1)
+quarterly_data("2014", 3)
 
 # yearly_data("2014")
