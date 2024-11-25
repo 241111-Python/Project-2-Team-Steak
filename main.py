@@ -10,7 +10,7 @@ def select_option(number):
         if number == 1:
             stockName.latest_data()
         elif number == 2:
-            print("You want to View LOWEST trading price")
+            stockName.all_time_data()
         elif number == 3:
             date_string = input("Enter a date (YYYY-MM-DD): ")
             stockName.specific_date_data(date_string)
