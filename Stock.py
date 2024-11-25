@@ -29,7 +29,7 @@ class Stock:
         print(self.data[-1])
 
     def specific_date_data(self, date_string):
-        # date_string = input("Enter a date (YYYY-MM-DD): ")
+        #date_string = input("Enter a date (YYYY-MM-DD): ")
         date_object = datetime.strptime(date_string, "%Y-%m-%d")
         if (date_object.weekday() >= 5):
             print("Please enter a valid weekday! Stock markets close on weekends.")
@@ -161,4 +161,9 @@ class Stock:
     def yearly_data(self, year_string):
         date_start_string = year_string + "-01-01"
         date_end_string = year_string + "-12-31"
+        self.range_date_data(date_start_string, date_end_string)
+
+    def all_time_data(self):
+        date_start_string = self.data[0].date
+        date_end_string = self.data[-1].date
         self.range_date_data(date_start_string, date_end_string)
