@@ -5,10 +5,6 @@ import matplotlib.pyplot as plt
 import json
 
 
-'''
-WHOLE GAME
-'''
-
 def select_option(number):
     default_Response = True
 
@@ -75,18 +71,6 @@ while True:  # Main menu loop
             user_input = int(input()) - 1
             listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
 
-data_source = f"./stock-data/{listOfStocks[user_input]}.json"
-with open(data_source, "r") as file:
-    for dict in json.load(file):
-        #print(dict)
-        stockName.addData(StockEntry(dict["date"], dict["open"], dict["high"], dict["low"], dict["close"], dict["volume"]))
-'''
-for x in stockName.data:
-    print(x)
-
-print(f"stockName: {listOfStocks[user_input]}")
-'''
-#print(globals()[listOfStocks[user_input].lower()].data[0])
             globals()[listOfStocks[user_input].lower()] = Stock(listOfStocks[user_input])
             stockName = globals()[listOfStocks[user_input].lower()]
 
@@ -137,6 +121,7 @@ Enter a number to select one of the following:
 '''
 store something in txt file?
 '''
+
 # Function for retrieving the latest stock data
 def latest_data():
     print(stockName.data[-1])
