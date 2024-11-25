@@ -27,7 +27,7 @@ class Stock:
         print(self.data[-1])
 
     def specific_date_data(self, date_string):
-        # date_string = input("Enter a date (YYYY-MM-DD): ")
+        #date_string = input("Enter a date (YYYY-MM-DD): ")
         date_object = datetime.strptime(date_string, "%Y-%m-%d")
         if (date_object.weekday() >= 5):
             print("Please enter a valid weekday! Stock markets close on weekends.")

@@ -8,21 +8,23 @@ def select_option(number):
 
     while default_Response:
         if number == 1:
-            for x in stockName.data:
-                print(x)
-            print(f"stockName: {listOfStocks[user_input]}")
+            stockName.latest_data()
         elif number == 2:
             print("You want to View LOWEST trading price")
         elif number == 3:
-            print("You want to View HIGHEST trading price")
+            date_string = input("Enter a date (YYYY-MM-DD): ")
+            stockName.specific_date_data(date_string)
         elif number == 4:
-            print("You want to View all stock data on a SPECIFIC date")
+            date_start_string = input("Enter a start date (YYYY-MM-DD): ")
+            date_end_string = input("Enter an end date (YYYY-MM-DD): ")
+            stockName.range_date_data(date_start_string, date_end_string)
         elif number == 5:
-            print(
-                "View stock price change percentage from __ to __ (ANNUALLY, QUARTERLY)"
-            )
+            year_input = input("Enter year: ")
+            quarter_input = int(input("Enter quarter (1-4): "))
+            stockName.quarterly_data(year_input, quarter_input)
         elif number == 6:
-            print("You want to Return stock price change percentage (ALL TIME)")
+            year_input = input("Enter year: ")
+            stockName.yearly_data(year_input)
         else:
             print("Invalid Option: Try Again")
             return True  # Return to previous menu
@@ -49,12 +51,12 @@ question_Prompt_2 = "Would you like to view another statistic? (y/n)"
 question_Prompt = """
 =========================================================
 Enter a number to select one of the following
-    [1] - View LATEST stock data 
-    [2] - View LOWEST trading price
-    [3] - View HIGHEST trading price
-    [4] - View all stock data on a SPECIFIC date 
-    [5] - View stock price change percentage from __ to __ (ANNUALLY, QUARTERLY)
-    [6] - Return stock price change percentage (ALL TIME)
+    [1] - View Latest trading price
+    [2] - View all stock data          # print day 1 and latest data
+    [3] - View all stock data on a SPECIFIC date 
+    [4] - View all stock data from __ to __
+    [5] - View stock data from a specific year at Q? (QUARTERLY)
+    [6] - View stock data for a specific year (ANNUALLY)
 ========================================================="""
 
 
@@ -97,20 +99,7 @@ while True:  # Main menu loop
         elif 0 <= user_input <= 4:
             print(f"\nAccessing {listOfStocks[user_input]}...")
             while True:  # Submenu loop for statistics
-                print(
-                    """
-=========================================================
-Enter a number to select one of the following:
-    [1] - View LATEST stock data 
-    [2] - View LOWEST trading price
-    [3] - View HIGHEST trading price
-    [4] - View all stock data on a SPECIFIC date 
-    [5] - View stock price change percentage from __ to __ (ANNUALLY, QUARTERLY)
-    [6] - Return stock price change percentage (ALL TIME)
-    [0] - Go Back to the Stock Selection Menu
-=========================================================
-                    """
-                )
+                print(question_Prompt)
                 try:
                     option = int(input("Enter your choice: "))
                     if option == 0:
