@@ -124,9 +124,9 @@ class Stock:
 
             plt.xticks([dates[0], dates[-1]])
             if (percentage_change > 0):
-                plt.title("Daily Stock Opening and Closing Prices( ↑" + str(round(percentage_change,2)) + "%)")
+                plt.title("Daily " + self.name +  " Opening and Closing Prices( ↑" + str(round(percentage_change,2)) + "%)")
             else:
-                plt.title("Daily Stock Opening and Closing Prices( ↓" + str(round(percentage_change,2)) + "%)")
+                plt.title("Daily " + self.name +  " Opening and Closing Prices( ↓" + str(round(percentage_change,2)) + "%)")
             plt.xticks(rotation=45)
             plt.tight_layout()
 
@@ -135,9 +135,9 @@ class Stock:
             plt.figure(figsize=(10,5))
             plt.plot(dates, closing_prices, color='b', label='Closing Price')
             if (percentage_change > 0):
-                plt.title("Daily Stock Opening and Closing Prices( ↑" + str(round(percentage_change,2)) + "%)")
+                plt.title("Daily " + self.name +  " Opening and Closing Prices( ↑" + str(round(percentage_change,2)) + "%)")
             else:
-                plt.title("Daily Stock Opening and Closing Prices( ↓" + str(round(percentage_change,2)) + "%)")
+                plt.title("Daily " + self.name +  " Opening and Closing Prices( ↓" + str(round(percentage_change,2)) + "%)")
             plt.xlabel('Date')
             plt.ylabel('Closing Price')
             plt.xticks([dates[0], dates[-1]])
