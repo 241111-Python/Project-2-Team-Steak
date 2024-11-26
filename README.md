@@ -1,4 +1,4 @@
 ## Group Members:
--Emanuel Rivas
--Jeffrey Mai
--Romeo Ashkar
+- Emanuel Rivas
+- Jeffrey Mai
+- Romeo Ashkar
