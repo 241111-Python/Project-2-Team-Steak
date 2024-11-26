@@ -69,6 +69,11 @@ class Stock:
                 start_price = i.close
                 in_range = True
                 start_exists = True
+            if ((i.date == date_end_string) or (date_object > date_end_object)):
+                end_price = i.close
+                in_range = False
+                end_exists = True
+                break
             if (in_range == True):
                 if (i.low < lowest_price):
                     lowest_price = i.low
@@ -82,11 +87,6 @@ class Stock:
                 closing_prices.append(i.close)
                 opening_prices.append(i.open)
                 data_string = data_string + str(i)
-            if ((i.date == date_end_string) or (date_object > date_end_object)):
-                end_price = i.close
-                in_range = False
-                end_exists = True
-                break
         if ((start_exists == False) or (end_exists == False)):
             print("Please enter valid start and end dates!")
             return
