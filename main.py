@@ -129,12 +129,12 @@ def access_secondary_menu(stock, file_path = None):
             with open(file_path + "/latest_data.txt", "a") as file:
                 file.write("Stock: " + stock.name + "\n")
                 file.write(str(stock.latest_data()))
-                file.write("Date: " + str(datetime.date.today()) + "\n\n")
+                file.write("Date: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n\n")
         else:
             with open("latest_data.txt", "a") as file:
                 file.write("Stock: " + stock.name + "\n")
                 file.write(str(stock.latest_data()))
-                file.write("Date: " + str(datetime.date.today()) + "\n\n")
+                file.write("Date: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n\n")
         exit(0)
     
     while True:
