@@ -5,6 +5,9 @@ import argparse
 import datetime
 import re
 
+                                                            #STEAK N STAKES
+
+
 parser = argparse.ArgumentParser(description="Stock Analyzer Tool")                                                                                         #Created Parsing arguments to allow users to automate or semi-automate the script depending on their needs
 parser.add_argument("--filePath", type=str, help="Path to your custom JSON stock data file", required=False)                                                #First OPTIONAL parsing argument      filepath    ex: "python .\main.py --filePath stock-data\AAL.json"
 parser.add_argument("--defaultInput", type=int, help="Input to select ALL stock data", required=False)                                                      #Second OPTIONAL parsing argument  defaultInput   ex: ".\main.py --filePath stock-data\AAL.json --defaultInput 1"
@@ -22,10 +25,10 @@ Enter a number to select one of the following
 ========================================================="""
 listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
 
-def select_option(stock, number):                                                                                                                      #Logic for implementing the statistics menu
-    while True:                                                                                                                                        #Depending on which number was input is which function from Stock.py will be called
+def select_option(stock, number):                                                                                                                          #Logic for implementing the statistics menu
+    while True:                                                                                                                                            #Depending on which number was input is which function from Stock.py will be called
         if number == 1:
-            stock.latest_data()
+            print(stock.latest_data())
         elif number == 2:
             stock.all_time_data()
         elif number == 3:
