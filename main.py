@@ -10,7 +10,7 @@ parser.add_argument("--filePath", type=str, help="Path to your custom JSON stock
 parser.add_argument("--defaultInput", type=int, help="Input to select ALL stock data", required=False)
 args = parser.parse_args()
 
-listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX"]
+listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
 
 def select_option(stock, number):
     while True:
