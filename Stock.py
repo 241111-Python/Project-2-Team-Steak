@@ -2,6 +2,7 @@ from datetime import datetime
 from docx import Document
 from docx.shared import Inches
 import matplotlib.pyplot as plt
+import humanize
 
 class Stock:
     def __init__(self, name):
@@ -96,14 +97,18 @@ class Stock:
         avg_volume = total_volume/days
         # print(data_string)
 
-        if (is_yearly == False):
+        rounded_values = [round(var, 2) for var in [lowest_price, highest_price, avg_closing, percentage_change, close_open_diff]]
+        readable_volume = humanize.intword(avg_volume)
 
-            print("Lowest price is: " + str(lowest_price))
-            print("Highest price is: " + str(highest_price))
-            print("Average closing price is: " + str(avg_closing))
-            print("Change in price is: " + str(percentage_change) + "%")
-            print("Closing vs opening price is: " + str(close_open_diff))
-            print("Average volume over this time period is: " + str(avg_volume))
+        print("\nLowest price is: " + str(rounded_values[0]))
+        print("Highest price is: " + str(rounded_values[1]))
+        print("Average closing price is: " + str(rounded_values[2]))
+        print("Change in price is: " + str(rounded_values[3]) + "%")
+        print("Closing vs opening price is: " + str(rounded_values[4]))
+        print("Average volume over this time period is: " + str(readable_volume))
+        print("=========================================================")
+
+        if (is_yearly == False):
 
             fig, ax1 = plt.subplots()
 
@@ -140,12 +145,13 @@ class Stock:
 
         plt.savefig("graph.png")
         doc = Document()
-        doc.add_paragraph("Lowest price is: " + str(lowest_price) + 
-                          "\nHighest price is: " + str(highest_price) + 
-                          "\nAverage closing price is: " + str(avg_closing) + 
-                          "\nChange in price is: " + str(percentage_change) + 
-                          "%\nClosing vs opening price is: " + str(close_open_diff) + 
-                          "\nAverage volume over this time period is: " + str(avg_volume) + "\n")
+        doc.add_paragraph("Retrieving data from " + date_start_string + " to " + date_end_string +
+                          "\nLowest price is: " + str(rounded_values[0]) + 
+                          "\nHighest price is: " + str(rounded_values[1]) + 
+                          "\nAverage closing price is: " + str(rounded_values[2]) + 
+                          "\nChange in price is: " + str(rounded_values[3]) + 
+                          "%\nClosing vs opening price is: " + str(rounded_values[4]) + 
+                          "\nAverage volume over this time period is: " + str(readable_volume) + "\n")
         doc.add_picture('graph.png', width=Inches(6))
         doc.save('statistics.docx')
         plt.show()
