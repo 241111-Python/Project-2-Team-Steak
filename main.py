@@ -5,9 +5,9 @@ import argparse
 import datetime
 import re
 
-parser = argparse.ArgumentParser(description="Stock Analyzer Tool")
-parser.add_argument("--filePath", type=str, help="Path to your custom JSON stock data file", required=False)
-parser.add_argument("--defaultInput", type=int, help="Input to select ALL stock data", required=False)
+parser = argparse.ArgumentParser(description="Stock Analyzer Tool")                                                                                         #Created Parsing arguments to allow users to automate or semi-automate the script depending on their needs
+parser.add_argument("--filePath", type=str, help="Path to your custom JSON stock data file", required=False)                                                #First OPTIONAL parsing argument      filepath    ex: "python .\main.py --filePath stock-data\AAL.json"
+parser.add_argument("--defaultInput", type=int, help="Input to select ALL stock data", required=False)                                                      #Second OPTIONAL parsing argument  defaultInput   ex: ".\main.py --filePath stock-data\AAL.json --defaultInput 1"
 args = parser.parse_args()
 
 question_Prompt = """
@@ -22,8 +22,8 @@ Enter a number to select one of the following
 ========================================================="""
 listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
 
-def select_option(stock, number):
-    while True:
+def select_option(stock, number):                                                                                                                      #Logic for implementing the statistics menu
+    while True:                                                                                                                                        #Depending on which number was input is which function from Stock.py will be called
         if number == 1:
             stock.latest_data()
         elif number == 2:
@@ -34,7 +34,7 @@ def select_option(stock, number):
         elif number == 4:
             date_start_string = input("Enter a start date (YYYY-MM-DD): ")
             date_end_string = input("Enter an end date (YYYY-MM-DD): ")
-            stock.range_date_data(date_start_string, date_end_string, n)
+            stock.range_date_data(date_start_string, date_end_string)
         elif number == 5:
             year_input = input("Enter year: ")
             quarter_input = int(input("Enter quarter (1-4): "))
@@ -61,7 +61,7 @@ def select_option(stock, number):
             return False
 
 
-def load_stock_data(file_path, stock_name="Custom Stock"):
+def load_stock_data(file_path, stock_name="Custom Stock"):                                                                                                 #Function to load JSON files if user wants to provide their own 
     stock = Stock(stock_name)
     try:
         with open(file_path, "r") as file:
@@ -78,14 +78,14 @@ def load_stock_data(file_path, stock_name="Custom Stock"):
                 )
     except FileNotFoundError:
         print(f"Error: File not found at {file_path}")
-        return None
-    except json.JSONDecodeError:
+        return None 
+    except json.JSONDecodeError:                                                                                                                         #This error is if the JSON is not formatted properly
         print(f"Error: Failed to parse JSON from {file_path}")
         return None
     return stock
 
 
-def main_menu():
+def main_menu():                                                                                                                                        #Logic for the main menu function
     while True:
         print(
             """Welcome! Enter a number to access data on a specific stock!
@@ -122,8 +122,8 @@ def main_menu():
             print("Invalid input. Please enter a valid number.")
 
 
-def access_secondary_menu(stock, file_path = None):
-    if args.defaultInput == 1:
+def access_secondary_menu(stock, file_path = None):                                                                                                 #Function to skip to the secondary menu if a separate JSON file is provided by the user (Used if parsing args are provided)                                           
+    if args.defaultInput == 1:                                                                                                                      #Will automatically run option 1 from the stats menu if the input field is also provided as an args (Reference line 10)
         print(stock.latest_data())
         if file_path:
             with open(file_path + "/latest_data.txt", "a") as file:
@@ -150,9 +150,8 @@ def access_secondary_menu(stock, file_path = None):
             print("Invalid input. Please enter a valid number.")
 
 
-# Main execution logic
-if args.filePath:
-    print(f"Loading custom JSON stock data from: {args.filePath}")
+if args.filePath:                                                                                                                                 #This block will load data from a user inputted JSON file and automatically format it so it can be called through the crontab as well
+    print(f"Loading custom JSON stock data from: {args.filePath}")                                                                                #The stock value will be set to the data from the file and the second menu function will be called 
     stock = None
     if args.filePath[:5] == "/mnt/":
         stock_name = re.split(r'[\/.]', args.filePath)
