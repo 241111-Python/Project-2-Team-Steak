@@ -10,6 +10,16 @@ parser.add_argument("--filePath", type=str, help="Path to your custom JSON stock
 parser.add_argument("--defaultInput", type=int, help="Input to select ALL stock data", required=False)
 args = parser.parse_args()
 
+question_Prompt = """
+=========================================================
+Enter a number to select one of the following
+    [1] - View Latest trading price
+    [2] - View all stock data       
+    [3] - View all stock data on a SPECIFIC date 
+    [4] - View all stock data from __ to __
+    [5] - View stock data from a specific year at Q? (QUARTERLY)
+    [6] - View stock data for a specific year (ANNUALLY)
+========================================================="""
 listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
 
 def select_option(stock, number):
@@ -49,18 +59,6 @@ def select_option(stock, number):
         else:
             print("Invalid Input. Returning to the main menu...")
             return False
-
-
-question_Prompt = """
-=========================================================
-Enter a number to select one of the following
-    [1] - View Latest trading price
-    [2] - View all stock data       
-    [3] - View all stock data on a SPECIFIC date 
-    [4] - View all stock data from __ to __
-    [5] - View stock data from a specific year at Q? (QUARTERLY)
-    [6] - View stock data for a specific year (ANNUALLY)
-========================================================="""
 
 
 def load_stock_data(file_path, stock_name="Custom Stock"):
@@ -124,13 +122,19 @@ def main_menu():
             print("Invalid input. Please enter a valid number.")
 
 
-def access_secondary_menu(stock):
+def access_secondary_menu(stock, file_path = None):
     if args.defaultInput == 1:
         print(stock.latest_data())
-        with open("latest_data.txt", "a") as file:
-            file.write("Stock: " + stock.name + "\n")
-            file.write(str(stock.latest_data()))
-            file.write("Date: " + str(datetime.date.today()) + "\n\n")
+        if file_path:
+            with open(file_path + "/latest_data.txt", "a") as file:
+                file.write("Stock: " + stock.name + "\n")
+                file.write(str(stock.latest_data()))
+                file.write("Date: " + str(datetime.date.today()) + "\n\n")
+        else:
+            with open("latest_data.txt", "a") as file:
+                file.write("Stock: " + stock.name + "\n")
+                file.write(str(stock.latest_data()))
+                file.write("Date: " + str(datetime.date.today()) + "\n\n")
         exit(0)
     
     while True:
@@ -149,9 +153,16 @@ def access_secondary_menu(stock):
 # Main execution logic
 if args.filePath:
     print(f"Loading custom JSON stock data from: {args.filePath}")
-    stock_name = re.split(r'[\\.]', args.filePath)
-    stock = load_stock_data(args.filePath, stock_name[1])
-    if stock:
-        access_secondary_menu(stock)
+    stock = None
+    if args.filePath[:5] == "/mnt/":
+        stock_name = re.split(r'[\/.]', args.filePath)
+        stock = load_stock_data(args.filePath, stock_name[-2])
+        if stock:
+            access_secondary_menu(stock, "/mnt/d/Visual Studio Codes/Revature/Week 2/Project-2-Team-Steak")
+    else:
+        stock_name = re.split(r'[\\.]', args.filePath)
+        stock = load_stock_data(args.filePath, stock_name[1])
+        if stock:
+            access_secondary_menu(stock)
 else:
     main_menu()
