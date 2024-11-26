@@ -12,7 +12,7 @@ class Stock:
         self.data.append(data)
 
     def latest_data(self):
-        print(self.data[-1])
+        return self.data[-1]
 
     def specific_date_data(self, date_string):
         #date_string = input("Enter a date (YYYY-MM-DD): ")

@@ -2,18 +2,17 @@ from Stock import Stock
 from StockEntry import StockEntry
 import json
 import argparse
-
+import datetime
+import re
 
 parser = argparse.ArgumentParser(description="Stock Analyzer Tool")
 parser.add_argument("--filePath", type=str, help="Path to your custom JSON stock data file", required=False)
 parser.add_argument("--defaultInput", type=int, help="Input to select ALL stock data", required=False)
-
-
 args = parser.parse_args()
 
+listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX"]
 
 def select_option(stock, number):
-
     while True:
         if number == 1:
             stock.latest_data()
@@ -89,7 +88,6 @@ def load_stock_data(file_path, stock_name="Custom Stock"):
 
 
 def main_menu():
-    listOfStocks = ["MSFT", "AAPL", "AMZN", "NFLX", "GOOG"]
     while True:
         print(
             """Welcome! Enter a number to access data on a specific stock!
@@ -128,9 +126,13 @@ def main_menu():
 
 def access_secondary_menu(stock):
     if args.defaultInput == 1:
-        stock.latest_data()
+        print(stock.latest_data())
+        with open("latest_data.txt", "a") as file:
+            file.write("Stock: " + stock.name + "\n")
+            file.write(str(stock.latest_data()))
+            file.write("Date: " + str(datetime.date.today()) + "\n\n")
         exit(0)
-        
+    
     while True:
         print(question_Prompt)
         try:
@@ -147,7 +149,8 @@ def access_secondary_menu(stock):
 # Main execution logic
 if args.filePath:
     print(f"Loading custom JSON stock data from: {args.filePath}")
-    stock = load_stock_data(args.filePath)
+    stock_name = re.split(r'[\\.]', args.filePath)
+    stock = load_stock_data(args.filePath, stock_name[1])
     if stock:
         access_secondary_menu(stock)
 else:
