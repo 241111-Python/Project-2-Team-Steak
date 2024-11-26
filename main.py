@@ -34,7 +34,7 @@ def select_option(stock, number):
         elif number == 4:
             date_start_string = input("Enter a start date (YYYY-MM-DD): ")
             date_end_string = input("Enter an end date (YYYY-MM-DD): ")
-            stock.range_date_data(date_start_string, date_end_string)
+            stock.range_date_data(date_start_string, date_end_string, n)
         elif number == 5:
             year_input = input("Enter year: ")
             quarter_input = int(input("Enter quarter (1-4): "))
@@ -129,12 +129,12 @@ def access_secondary_menu(stock, file_path = None):
             with open(file_path + "/latest_data.txt", "a") as file:
                 file.write("Stock: " + stock.name + "\n")
                 file.write(str(stock.latest_data()))
-                file.write("Date: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n\n")
+                file.write("Date: " + str(datetime.date.today()) + "\n\n")
         else:
             with open("latest_data.txt", "a") as file:
                 file.write("Stock: " + stock.name + "\n")
                 file.write(str(stock.latest_data()))
-                file.write("Date: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n\n")
+                file.write("Date: " + str(datetime.date.today()) + "\n\n")
         exit(0)
     
     while True:
