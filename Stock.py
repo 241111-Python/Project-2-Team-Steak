@@ -7,20 +7,6 @@ class Stock:
     def __init__(self, name):
         self.name = name
         self.data = []
-        self.highest = {
-            "open": float("-inf"),
-            "high": float("-inf"),
-            "low": float("-inf"),
-            "close": float("-inf"),
-            "volume": float("-inf"),
-        }
-        self.lowest = {
-            "open": float("inf"),
-            "high": float("inf"),
-            "low": float("inf"),
-            "close": float("inf"),
-            "volume": float("inf"),
-        }
 
     def addData(self, data):
         self.data.append(data)
@@ -162,13 +148,6 @@ class Stock:
                           "\nAverage volume over this time period is: " + str(avg_volume) + "\n")
         doc.add_picture('graph.png', width=Inches(6))
         doc.save('statistics.docx')
-        # with open('statistics.docx', 'w') as file:
-        #     file.write("Lowest price is: " + str(lowest_price) + "\n")
-        #     file.write("Highest price is: " + str(highest_price) + "\n")
-        #     file.write("Average closing price is: " + str(avg_closing) + "\n")
-        #     file.write("Change in price is: " + str(percentage_change) + "%\n")
-        #     file.write("Closing vs opening price is: " + str(close_open_diff) + "\n")
-        #     file.write("Average volume over this time period is: " + str(avg_volume) + "\n")
         plt.show()
 
     def quarterly_data(self, year_string, quarter):
