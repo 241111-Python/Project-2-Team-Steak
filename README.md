@@ -9,9 +9,9 @@
 
 ## How does it work?
 
-To run the script normally, enter python ./main.py into your cli
-To run the script with a specific JSON data file, run python .\main.py --filePath stock-data\{name_of_your_stock}.json 
-To run the script with a specific file and to automatically store the data for the MOST CURRENT DAY run: python .\main.py --filePath stock-data\AAL.json --defaultInput 1
+To run the script normally, enter python ./main.py into your cli <br />
+To run the script with a specific JSON data file, run python .\main.py --filePath stock-data\{name_of_your_stock}.json  <br />
+To run the script with a specific file and to automatically store the data for the MOST CURRENT DAY run: python .\main.py --filePath stock-data\AAL.json --defaultInput 1 <br />
 
 
 1. Once main.py is ran the user will be prompted to select one of the 5 included stocks.
