@@ -1,9 +1,4 @@
-## Group Members:
-- Emanuel Rivas
-- Jeffrey Mai
-- Romeo Ashkar
-
-# STEAK N STAKE
+# Project Name: STEAK N STAKE
 
 ## An interactive python script used to obtain visual and numerical data from stocks stored in JSON file format.
 
@@ -25,3 +20,7 @@ To run the script with a specific file and to automatically store the data for t
 4. The output will be stored in both a txt file as well as a word document using the python-docx library.
 
 
+### Group Members:
+- Emanuel Rivas
+- Jeffrey Mai
+- Romeo Ashkar
