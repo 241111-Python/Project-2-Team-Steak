@@ -1,6 +1,6 @@
 # Project Name: STEAK N STAKE
 
-## An interactive python script used to obtain visual and numerical data from stocks stored in JSON file format.
+This application is designed to collect and analyze data from multiple stock files. It provides users with the option to explore the data from some preselected stocks or input their own JSON files to run various statistical operations and study trends in stock prices through generated graphs and console outputs. Users have the option to view the latest data, explore stock prices on a specific day, or examine the stock's information and chart over a specified time period.
 
 ### Packages to install:
   - pip install python-docx
